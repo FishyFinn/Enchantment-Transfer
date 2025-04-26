@@ -2,6 +2,7 @@ package com.treekicker4.enchantmenttransfer;
 
 import com.mojang.logging.LogUtils;
 import com.treekicker4.enchantmenttransfer.core.EnchantmentTransferConfig;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -14,6 +15,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+
+import java.util.Map;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(EnchantmentTransfer.MODID)
@@ -60,6 +63,61 @@ public class EnchantmentTransfer
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             // Some client setup code
+        }
+    }
+    public static int transferCost(Map<Enchantment, Integer> enchantments) {
+
+        if (EnchantmentTransferConfig.fixed_value.get() != 1000) {
+            return Math.max(EnchantmentTransferConfig.fixed_value.get(),1);
+        }
+
+        int totalXPCost = 0;
+        totalXPCost = (int) (totalXPCost * EnchantmentTransferConfig.factor_value.get());
+        for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
+            if (entry.getKey() != null) {
+                //add 1 to totalXPCost for each enchantment
+                totalXPCost++;
+
+                Enchantment enchantment = entry.getKey();
+                int level = entry.getValue();
+
+                int enchantmentRarityCost;
+                switch (enchantment.getRarity()) {
+                    default:
+                        enchantmentRarityCost = 1;
+                    case COMMON:
+                        enchantmentRarityCost = 1;
+                        break;
+                    case UNCOMMON:
+                        enchantmentRarityCost = 2;
+                        break;
+                    case RARE:
+                        enchantmentRarityCost = 3;
+                        break;
+                    case VERY_RARE:
+                        enchantmentRarityCost = 4;
+                }
+
+                totalXPCost += enchantmentRarityCost * level;
+            }
+        }
+
+        double factor_value = EnchantmentTransferConfig.factor_value.get();
+        if (factor_value > 0.0) {
+            return (int) Math.round(totalXPCost * factor_value);
+        } else {
+            return 1;
+        }
+    }
+    public static int transferCost() {
+        if (EnchantmentTransferConfig.fixed_value.get() != 1000) {
+            return Math.max(EnchantmentTransferConfig.fixed_value.get(),1);
+        }
+        double factor_value = EnchantmentTransferConfig.factor_value.get();
+        if (factor_value > 0.0) {
+            return (int) Math.round(factor_value);
+        } else {
+            return 1;
         }
     }
 }
