@@ -76,8 +76,6 @@ public class AnvilEvents {
             event.setCanceled(true);
             return;
         }
-        event.getPlayer().sendSystemMessage(Component.literal("Enchantment Transfer: ").append(leftItem.getHighlightTip(leftItem.getHoverName())));
-        return;
     }
 
     @SubscribeEvent
