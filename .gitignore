@@ -3,3 +3,6 @@
 /run-data/
 /src/test/
 /src/generated/
+/gradle/
+/build/
+/.gradle/
