@@ -1,7 +1,6 @@
 package com.treekicker4.enchantmenttransfer.events;
 import com.treekicker4.enchantmenttransfer.EnchantmentTransfer;
 import com.treekicker4.enchantmenttransfer.core.EnchantmentTransferConfig;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
