@@ -3,7 +3,6 @@ package com.treekicker4.enchantmenttransfer;
 import com.mojang.logging.LogUtils;
 import com.treekicker4.enchantmenttransfer.core.EnchantmentTransferConfig;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,8 +22,6 @@ public class EnchantmentTransfer
 {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "enchantmenttransfer";
-    // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
 
     public EnchantmentTransfer()
     {

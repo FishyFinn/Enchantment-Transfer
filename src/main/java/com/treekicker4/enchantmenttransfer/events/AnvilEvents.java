@@ -72,7 +72,6 @@ public class AnvilEvents {
             event.setOutput(ItemStack.EMPTY);
             event.setCost(0);
             event.setMaterialCost(0);
-            event.getPlayer().sendSystemMessage(Component.literal("Enchantment Transfer: ").append("This item cannot be enchanted!"));
             event.setCanceled(true);
             return;
         }
